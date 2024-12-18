@@ -60,6 +60,7 @@ jobs:
         name: Debug build
         path: |
           target/debug/*
+          !target/debug/gn_out
           !target/debug/build
           !target/debug/deps
           !target/debug/incremental
@@ -71,6 +72,7 @@ jobs:
         name: Release build
         path: |
           target/release/*
+          !target/release/gn_out
           !target/release/build
           !target/release/deps
           !target/release/incremental

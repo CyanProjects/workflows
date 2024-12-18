@@ -42,16 +42,16 @@ jobs:
         key: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-${{ hashFiles(''Cargo.lock'') }}'
         restore-keys: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-'
     - name: Restore cache build output
-        uses: actions/cache/restore@v4
-        with:
-          path: |-
-            ./target
-            !./target/*/gn_out
-            !./target/*/gn_root
-            !./target/*/*.zip
-            !./target/*/*.tar.gz
-          key: never_saved
-          restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-${{ matrix.ref }}-'
+      uses: actions/cache/restore@v4
+      with:
+        path: |-
+          ./target
+          !./target/*/gn_out
+          !./target/*/gn_root
+          !./target/*/*.zip
+          !./target/*/*.tar.gz
+        key: never_saved
+        restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-${{ matrix.ref }}-'
     - name: Build (Debug)
       run: 'cargo build --verbose'
     - name: Upload artifacts (Debug)
@@ -75,13 +75,13 @@ jobs:
           !target/release/deps
           !target/release/incremental
     - name: Save cache build output (main)
-        uses: actions/cache/save@v4
-        with:
-          path: |-
-            ./target
-            !./target/*/gn_out
-            !./target/*/gn_root
-            !./target/*/*.zip
-            !./target/*/*.tar.gz
-          key: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-${{ matrix.ref }}-'
+      uses: actions/cache/save@v4
+      with:
+        path: |-
+          ./target
+          !./target/*/gn_out
+          !./target/*/gn_root
+          !./target/*/*.zip
+          !./target/*/*.tar.gz
+        key: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-${{ matrix.ref }}-'
         

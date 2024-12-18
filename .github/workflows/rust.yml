@@ -30,17 +30,17 @@ jobs:
         repository: ${{ inputs.repository }}
         ref: ${{ inputs.ref }}
     - name: Cache Cargo home
-        uses: actions/cache@v4
-        with:
-          path: |-
-            ~/.cargo/.crates.toml
-            ~/.cargo/.crates2.json
-            ~/.cargo/bin
-            ~/.cargo/registry/index
-            ~/.cargo/registry/cache
-            ~/.cargo/git/db
-          key: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-${{ hashFiles(''Cargo.lock'') }}'
-          restore-keys: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-'
+      uses: actions/cache@v4
+      with:
+        path: |-
+          ~/.cargo/.crates.toml
+          ~/.cargo/.crates2.json
+          ~/.cargo/bin
+          ~/.cargo/registry/index
+          ~/.cargo/registry/cache
+          ~/.cargo/git/db
+        key: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-${{ hashFiles(''Cargo.lock'') }}'
+        restore-keys: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-'
     - name: Restore cache build output
         uses: actions/cache/restore@v4
         with:

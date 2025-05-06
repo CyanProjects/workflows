@@ -68,8 +68,9 @@ jobs:
       run: 'cargo +nightly build --profile ${{ inputs.profile }} --verbose --artifact-dir dist -Z unstable-options'
     - name: Upload extracts (${{ inputs.profile }})
       uses: actions/upload-artifact@v4
-      path: |
-        ${{ inputs.extract }}
+      with:
+        path: |
+          ${{ inputs.extract }}
     - name: Upload artifacts (${{ inputs.profile }})
       uses: actions/upload-artifact@v4
       with:

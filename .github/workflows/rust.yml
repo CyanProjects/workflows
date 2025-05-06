@@ -62,17 +62,13 @@ jobs:
         key: never_saved
         restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-'
     - name: Build (${{ inputs.profile }})
-      run: 'cargo build --profile ${{ inputs.profile }} --verbose'
+      run: 'cargo +nightly build --profile ${{ inputs.profile }} --verbose --artifact-dir dist -Z unstable-options'
     - name: Upload artifacts (${{ inputs.profile }})
       uses: actions/upload-artifact@v4
       with:
         name: Target Artifacts
         path: |
-          target/*/*
-          !target/*/gn_out
-          !target/*/build
-          !target/*/deps
-          !target/*/incremental
+          dist/*
     
     - name: Save cache build output (main)
       uses: actions/cache/save@v4

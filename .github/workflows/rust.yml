@@ -48,8 +48,8 @@ jobs:
           ~/.cargo/registry/index
           ~/.cargo/registry/cache
           ~/.cargo/git/db
-        key: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-${{ hashFiles(''Cargo.lock'') }}'
-        restore-keys: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ inputs.ref }}-'
+        key: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-${{ hashFiles(''Cargo.lock'') }}'
+        restore-keys: '31-cargo-home-${{ inputs.os }}-${{ inputs.repository }}-'
     - name: Restore cache build output
       uses: actions/cache/restore@v4
       with:
@@ -60,31 +60,20 @@ jobs:
           !./target/*/*.zip
           !./target/*/*.tar.gz
         key: never_saved
-        restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-${{ matrix.ref }}-'
-    - name: Build (Debug)
+        restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-'
+    - name: Build (${{ inputs.profile }})
       run: 'cargo build --profile ${{ inputs.profile }} --verbose'
-    - name: Upload artifacts (Debug)
+    - name: Upload artifacts (${{ inputs.profile }})
       uses: actions/upload-artifact@v4
       with:
-        name: Debug build
+        name: Target Artifacts
         path: |
-          target/debug/*
-          !target/debug/gn_out
-          !target/debug/build
-          !target/debug/deps
-          !target/debug/incremental
-    - name: Build (Release)
-      run: 'cargo build --release --verbose'
-    - name: Upload artifacts (Release)
-      uses: actions/upload-artifact@v4
-      with:
-        name: Release build
-        path: |
-          target/release/*
-          !target/release/gn_out
-          !target/release/build
-          !target/release/deps
-          !target/release/incremental
+          target/*/*
+          !target/*/gn_out
+          !target/*/build
+          !target/*/deps
+          !target/*/incremental
+    
     - name: Save cache build output (main)
       uses: actions/cache/save@v4
       with:

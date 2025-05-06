@@ -69,6 +69,7 @@ jobs:
     - name: Upload extracts (${{ inputs.profile }})
       uses: actions/upload-artifact@v4
       with:
+        name: Target Extracts
         path: |
           ${{ inputs.extract }}
     - name: Upload artifacts (${{ inputs.profile }})

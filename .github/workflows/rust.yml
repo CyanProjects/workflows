@@ -11,6 +11,15 @@ on:
         description: The repository to build on
         required: true
         type: string
+      profile:
+        description: The profile for build
+        type: choice
+        options:
+          - dev
+          - release
+          - release-lite
+          - release-with-debug
+        default: 'dev'
       ref:
         description: Ref a Branch/Tag/SHA whatever to checkout
         type: string
@@ -53,7 +62,7 @@ jobs:
         key: never_saved
         restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-${{ matrix.ref }}-'
     - name: Build (Debug)
-      run: 'cargo build --verbose'
+      run: 'cargo build --profile ${{ inputs.profile }} --verbose'
     - name: Upload artifacts (Debug)
       uses: actions/upload-artifact@v4
       with:

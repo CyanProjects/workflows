@@ -88,5 +88,5 @@ jobs:
           !./target/*/gn_root
           !./target/*/*.zip
           !./target/*/*.tar.gz
-        key: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-${{ matrix.ref }}-'
+        key: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-'
         

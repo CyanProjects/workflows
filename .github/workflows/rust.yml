@@ -70,6 +70,9 @@ jobs:
       run: |
         echo "SCCACHE_GHA_ENABLED=true" >> $GITHUB_ENV
         echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
+    - name: Setup Rust toolchains
+      run: |
+        rustup default nightly
     - name: Build (${{ inputs.profile }})
       run: 'cargo +nightly build --profile ${{ inputs.profile }} --verbose --artifact-dir dist -Z unstable-options'
     - name: Upload extracts (${{ inputs.profile }})

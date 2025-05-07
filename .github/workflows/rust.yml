@@ -64,6 +64,12 @@ jobs:
           !./target/*/*.tar.gz
         key: never_saved
         restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-'
+    - name: Run sccache-cache
+      uses: mozilla-actions/sccache-action@v0.0.9
+    - name: Set Rust caching env
+      run: |
+        echo "SCCACHE_GHA_ENABLED=true" >> $GITHUB_ENV
+        echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
     - name: Build (${{ inputs.profile }})
       run: 'cargo +nightly build --profile ${{ inputs.profile }} --verbose --artifact-dir dist -Z unstable-options'
     - name: Upload extracts (${{ inputs.profile }})

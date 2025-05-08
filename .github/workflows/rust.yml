@@ -90,9 +90,11 @@ jobs:
     
     - name: Save cache build output (main)
       uses: actions/cache/save@v4
+      if: always()
       with:
         path: |-
           ./target
+          ./target/build
           !./target/*/gn_out
           !./target/*/gn_root
           !./target/*/*.zip

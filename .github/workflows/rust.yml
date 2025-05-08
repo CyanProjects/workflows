@@ -58,12 +58,12 @@ jobs:
       with:
         path: |-
           ./target
+          ./target/build
           !./target/*/gn_out
           !./target/*/gn_root
           !./target/*/*.zip
           !./target/*/*.tar.gz
-        key: never_saved
-        restore-keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-'
+        keys: '31-cargo-target-${{ inputs.os }}-${{ inputs.repository }}-'
     - name: Run sccache-cache
       uses: mozilla-actions/sccache-action@v0.0.9
     - name: Set Rust caching env

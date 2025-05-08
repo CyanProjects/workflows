@@ -7,3 +7,5 @@ timeout: 2400s
 
 images: ['gcr.io/$PROJECT_ID/done-build']
 tags: ['done', 'build']
+options:
+  machineType: 'N1_HIGHCPU_32'

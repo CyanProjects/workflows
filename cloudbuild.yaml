@@ -1,0 +1,9 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'done'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/done-build', '.']
+
+timeout: 2400s
+
+images: ['gcr.io/$PROJECT_ID/done-build']
+tags: ['done', 'build']
